@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/sorttenaz"
+        android:title="Sắp xếp theo tên A->Z" />
+    <item
+        android:id="@+id/sortten"
+        android:title="Sắp xếp theo tên Z->A" />
+    <item
+        android:id="@+id/sortgiatang"
+        android:title="Sắp xếp theo giá tăng dần" />
+    <item
+        android:id="@+id/sortgia"
+        android:title="Sắp xếp theo giá giảm dần" />
+</menu>
