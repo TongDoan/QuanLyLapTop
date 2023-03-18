@@ -1,10 +1,13 @@
 package com.example.bttl;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,6 +26,30 @@ public class chitietsp extends AppCompatActivity {
     TextView txttensp,txtgiasp,txtmotasp;
     Spinner spinner;
     Button btndatmua;
+
+    int IdSanPham = 0;
+    int id;
+    String image;
+    String ten;
+    String gia;
+    String mota;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menugiohang, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.idgiohang:
+                Intent intent = new Intent(getApplicationContext(), giohangadapter.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +59,11 @@ public class chitietsp extends AppCompatActivity {
         Intent intent= getIntent();
         Bundle bundle=intent.getExtras();
         if(bundle!=null){
-            int id =bundle.getInt("id");
-            String image=bundle.getString("image");
-            String ten=bundle.getString("ten");
-            String gia=bundle.getString("gia");
-            String mota=bundle.getString("mota");
+            id =bundle.getInt("id");
+            image=bundle.getString("image");
+            ten=bundle.getString("ten");
+            gia=bundle.getString("gia");
+            mota=bundle.getString("mota");
             txttensp.setText(ten);
             DecimalFormat decimalFormat=new DecimalFormat("###,###,###");
             txtgiasp.setText(decimalFormat.format(Double.parseDouble(gia))+" VND");
@@ -44,6 +71,39 @@ public class chitietsp extends AppCompatActivity {
             Picasso.get().load(image).into(anhsp);
         }
         Evenspinner();
+        EvenDatMua();
+    }
+    private void EvenDatMua(){
+        btndatmua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainActivity.giohangArrayList.size() > 0){
+                    int sl = Integer.parseInt(spinner.getSelectedItem().toString());
+                    boolean check = false;
+                    for (int i = 0 ; i <MainActivity.giohangArrayList.size(); i++){
+                        if(MainActivity.giohangArrayList.get(i).getIdsp() == id){
+                            MainActivity.giohangArrayList.get(i).setSoluongsp(MainActivity.giohangArrayList.get(i).getSoluongsp() + sl);
+                            if(MainActivity.giohangArrayList.get(i).getSoluongsp() >= 10){
+                                MainActivity.giohangArrayList.get(i).setSoluongsp(10);
+                            }
+                            MainActivity.giohangArrayList.get(i).setGiasp(Integer.parseInt(gia)*MainActivity.giohangArrayList.get(i).getSoluongsp());
+                            check = true;
+                        }
+                    }
+                    if(check == false){
+                        int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                        long tongtien = soluong * Integer.parseInt(gia);
+                        MainActivity.giohangArrayList.add(new giohang(id,ten,tongtien,image,soluong));
+                    }
+                }else{
+                    int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                    long tongtien = soluong * Integer.parseInt(gia);
+                    MainActivity.giohangArrayList.add(new giohang(id,ten,tongtien,image,soluong));
+                }
+                Intent intent = new Intent(getApplicationContext(), giohangadapter.class);
+                startActivity(intent);
+            }
+        });
     }
     private void Evenspinner(){
         Integer[] sl=new Integer[]{1,2,3,4,5,6,7,8,9,10};

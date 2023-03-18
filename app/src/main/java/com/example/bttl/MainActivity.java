@@ -2,6 +2,7 @@ package com.example.bttl;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,17 +17,21 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -49,24 +54,49 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     RecyclerView recyclerView;
     NavigationView navigationView;
-    ListView listviewmenu;
+
     DrawerLayout drawerLayout;
     ArrayList<sanpham> sp;
     sanphamadapter spadapter;
-    ArrayList<menuitem> arrayList;
+
     MenuAdapter menuAdapter;
     ImageView imageButton;
     EditText txttimkiem;
-    Button btntimkiem;
-    Button btnhuy;
+    ImageView btntimkiem;
+    ImageView btnhuy;
     ArrayList<sanpham> sptimkiem;
     ArrayList<sanpham> spbandau;
+    ImageView btntang;
+    ImageView btngiam;
+   TextView trang;
+   int page =1;
+   public static ArrayList<giohang> giohangArrayList;
+   ArrayList<sanpham> spshow;
+
+    private int slitem=0;
     String url="https://appbanlaptop.000webhostapp.com/api/getsanpham.php";
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menugiohang, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.idgiohang:
+                Intent intent = new Intent(getApplicationContext(), giohangadapter.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar();
         ActionViewfipper();
         getsp(url);
-        Menuevent();
+
         registerForContextMenu(imageButton);
         btntimkiem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +124,21 @@ public class MainActivity extends AppCompatActivity {
                     }
                     sp.clear();
                     sp.addAll(sptimkiem);
-                    spadapter.notifyDataSetChanged();
+                    if(sp.size()%4==0){
+                        slitem=sp.size()/4;
+                    }
+                    else{
+                        slitem=sp.size()/4+1;
+                    }
+                    if(slitem==1){
+                        btntang.setVisibility(View.INVISIBLE);
+                    }else{
+                        btntang.setVisibility(View.VISIBLE);
+                    }
+                    trang.setText("1");
+                    btngiam.setVisibility(View.INVISIBLE);
+                    show(1);
+                    Toast.makeText(MainActivity.this, String.valueOf(slitem), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -107,31 +151,91 @@ public class MainActivity extends AppCompatActivity {
                 sptimkiem.clear();
                 sp.clear();
                 sp.addAll(spbandau);
-                spadapter.notifyDataSetChanged();
+                if(sp.size()%4==0){
+                    slitem=sp.size()/4;
+                }
+                else{
+                    slitem=sp.size()/4+1;
+                }
+                if(slitem==1){
+                    btntang.setVisibility(View.INVISIBLE);
+                }else{
+                    btntang.setVisibility(View.VISIBLE);
+                }
+                trang.setText("1");
+                btngiam.setVisibility(View.INVISIBLE);
+                show(1);
+                Toast.makeText(MainActivity.this, String.valueOf(slitem), Toast.LENGTH_SHORT).show();
+            }
+        });
+        btngiam.setVisibility(View.INVISIBLE);
+        btntang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int slm=Integer.parseInt(trang.getText().toString())+1;
+                if(slm>=slitem){
+                    btntang.setVisibility(View.INVISIBLE);
+                    btngiam.setVisibility(View.VISIBLE);
+                }
+                else{
+                    btntang.setVisibility(View.VISIBLE);
+                    btngiam.setVisibility(View.VISIBLE);
+                }
+                trang.setText(String.valueOf(slm));
+                show(slm);
+            }
+        });
+        btngiam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int slm=Integer.parseInt(trang.getText().toString())-1;
+                if(slm<=1){
+                    btngiam.setVisibility(View.INVISIBLE);
+                    btntang.setVisibility(View.VISIBLE);
+                }
+                else{
+                    btntang.setVisibility(View.VISIBLE);
+                    btngiam.setVisibility(View.VISIBLE);
+                }
+                trang.setText(String.valueOf(slm));
+                show(slm);
             }
         });
     }
-    private void Menuevent(){
-        listviewmenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                switch (i){
-                    case 0:
-                        Toast.makeText(MainActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
-                    break;
-                    case 1:
-                        Toast.makeText(MainActivity.this, "Địa chỉ", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        Toast.makeText(MainActivity.this, "Liên lạc", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
+
+    private void show(int page){
+        spshow.clear();
+        int dau=(page-1)*4;
+        int cuoi=page*4;
+        if(cuoi>=sp.size()){
+            cuoi=sp.size();
+        }
+        for(int i=dau;i<cuoi;i++){
+            spshow.add(sp.get(i));
+            spadapter.notifyDataSetChanged();
+        }
     }
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                Toast.makeText(this, "home", Toast.LENGTH_SHORT).show();
+               break;
+            case R.id.nav_location:
+                Toast.makeText(this, "Location", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_contact:
+                Toast.makeText(this, "Contatc", Toast.LENGTH_SHORT).show();
+                break;
 
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.context,menu);
     }
@@ -146,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                 );
-                spadapter.notifyDataSetChanged();
+                show(Integer.parseInt(trang.getText().toString().trim()));
                 break;
             case R.id.sortten:
                 Collections.sort(sp, new Comparator<sanpham>() {
@@ -156,27 +260,27 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                 );
-                spadapter.notifyDataSetChanged();
+                show(Integer.parseInt(trang.getText().toString().trim()));
                 break;
             case R.id.sortgiatang:
                 Collections.sort(sp, new Comparator<sanpham>() {
                             @Override
                             public int compare(sanpham sv1, sanpham sv2) {
-                                return (sv1.getGiasp().compareTo(sv2.getGiasp()));
+                                return (Double.parseDouble(sv1.getGiasp())<(Double.parseDouble(sv2.getGiasp()))?-1:1);
                             }
                         }
                 );
-                spadapter.notifyDataSetChanged();
+                show(Integer.parseInt(trang.getText().toString().trim()));
                 break;
             case R.id.sortgia:
                 Collections.sort(sp, new Comparator<sanpham>() {
                             @Override
                             public int compare(sanpham sv1, sanpham sv2) {
-                                return (sv2.getGiasp().compareTo(sv1.getGiasp()));
+                                return (Double.parseDouble(sv1.getGiasp())>(Double.parseDouble(sv2.getGiasp()))?-1:1);
                             }
                         }
                 );
-                spadapter.notifyDataSetChanged();
+                show(Integer.parseInt(trang.getText().toString().trim()));
                 break;
         }
         return super.onContextItemSelected(item);
@@ -233,13 +337,25 @@ public class MainActivity extends AppCompatActivity {
                                     hinhanh=object.getString("Hinhanh");
                                     mota=object.getString("Mota");
                                     sp.add(new sanpham(Id,tensp,giasp,hinhanh,mota));
-                                    spadapter.notifyDataSetChanged();
                                 } catch (JSONException e) {
                                     Toast.makeText(MainActivity.this,"fail" , Toast.LENGTH_LONG).show();
                                     e.printStackTrace();
                                 }
                             }
+                            if(sp.size()%4==0){
+                                slitem=sp.size()/4;
+                            }
+                            else{
+                                slitem=sp.size()/4+1;
+                            }
+                            if(slitem==1){
+                                btntang.setVisibility(View.INVISIBLE);
+                            }else{
+                                btntang.setVisibility(View.VISIBLE);
+                            }
+                            show(page);
                             spbandau.addAll(sp);
+
                         }
 
 
@@ -257,26 +373,33 @@ public class MainActivity extends AppCompatActivity {
         toolbar=(Toolbar) findViewById(R.id.toobarmanhinhchinh);
         viewFlipper=(ViewFlipper) findViewById(R.id.viewflipper);
         recyclerView=(RecyclerView) findViewById(R.id.recycleview);
-        navigationView=(NavigationView) findViewById(R.id.navigationview);
-        listviewmenu=(ListView) findViewById(R.id.manhinhmenu);
         imageButton=(ImageView) findViewById(R.id.imagebutton);
         txttimkiem=(EditText) findViewById(R.id.txttimkiem);
-        btntimkiem=(Button) findViewById(R.id.nuttimkiem);
-        btnhuy=(Button) findViewById(R.id.nuthuy);
+        btntimkiem=(ImageView) findViewById(R.id.nuttimkiem);
+        btnhuy=(ImageView) findViewById(R.id.nuthuy);
+        trang=(TextView) findViewById(R.id.textrang);
         sptimkiem=new ArrayList<>();
         spbandau=new ArrayList<>();
         drawerLayout=(DrawerLayout) findViewById(R.id.drawerlayout);
+        navigationView = findViewById(R.id.navigationview);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,
+                R.string.close_nav);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        spshow=new ArrayList<>();
         sp=new ArrayList<>();
-        spadapter=new sanphamadapter(this,sp);
+        spadapter=new sanphamadapter(this,spshow);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerView.setAdapter(spadapter);
-        arrayList=new ArrayList<>();
-        arrayList.add(new menuitem(R.drawable.house,"Trang chủ"));
-        arrayList.add(new menuitem(R.drawable.placeholder,"Địa chỉ"));
-        arrayList.add(new menuitem(R.drawable.communicate,"Liên lạc"));
-        menuAdapter=new MenuAdapter(this,arrayList);
-        listviewmenu.setAdapter(menuAdapter);
+        btntang=(ImageView) findViewById(R.id.buttontang);
+        btngiam=(ImageView) findViewById(R.id.buttongiam);
+        if(giohangArrayList != null){
+
+        }else{
+            giohangArrayList = new ArrayList<>();
+        }
 
     }
 }
