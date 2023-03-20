@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
    ArrayList<sanpham> spshow;
 
     private int slitem=0;
-    String url="http://192.168.56.148:8080/appbanhang/getsanpham.php";
+    String url="http://192.168.1.3:8080/appbanhang/getsanpham.php";
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menugiohang, menu);

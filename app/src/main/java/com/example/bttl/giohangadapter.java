@@ -1,5 +1,8 @@
 package com.example.bttl;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +37,40 @@ public class giohangadapter extends AppCompatActivity {
         Actiontoolbar();
         CheckData();
         EvenUltil();
+        EvenButton();
+    }
+
+    private void EvenButton() {
+        btnttmua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnthanhtoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainActivity.giohangArrayList.size()>0){
+                    Intent intent = new Intent(getApplicationContext(),TTKhachHang.class);
+                    startActivity(intent);
+                }else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
+                    builder.setTitle("Thông báo");
+                    builder.setMessage("Chưa có sản phẩm để thanh toán");
+
+                    builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            giohangadapterB.notifyDataSetChanged();
+                            EvenUltil();
+                        }
+                    });
+                    builder.show();
+                }
+
+            }
+        });
     }
 
     public static void EvenUltil(){

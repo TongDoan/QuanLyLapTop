@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
-
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
             }
         });
