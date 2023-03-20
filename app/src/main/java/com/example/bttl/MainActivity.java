@@ -74,12 +74,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView btntang;
     ImageView btngiam;
    TextView trang;
+   TextView tenuser;
    int page =1;
    public static ArrayList<giohang> giohangArrayList;
    ArrayList<sanpham> spshow;
 
     private int slitem=0;
-    String url="https://appbanlaptop.000webhostapp.com/api/getsanpham.php";
+    String url="http://192.168.56.148:8080/appbanhang/getsanpham.php";
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menugiohang, menu);
@@ -105,7 +106,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBar();
         ActionViewfipper();
         getsp(url);
-
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            String name = bundle.getString("Name");
+            tenuser.setText(name);
+        }
         registerForContextMenu(imageButton);
         btntimkiem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,7 +234,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_contact:
                 Toast.makeText(this, "Contatc", Toast.LENGTH_SHORT).show();
                 break;
-
+            case R.id.nav_logout:
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -387,6 +395,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        tenuser=(TextView) navigationView.getHeaderView(0).findViewById(R.id.tenusr);
         spshow=new ArrayList<>();
         sp=new ArrayList<>();
         spadapter=new sanphamadapter(this,spshow);
