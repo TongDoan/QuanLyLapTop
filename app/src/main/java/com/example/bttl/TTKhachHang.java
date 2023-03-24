@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -44,6 +45,9 @@ public class TTKhachHang extends AppCompatActivity {
         CharSequence[] sltp=new CharSequence[]{"Chọn thành phố","Hà Nội","Bắc Ninh","Bắc Giang"};
         ArrayAdapter<CharSequence> arrayAdapter=new ArrayAdapter<CharSequence>(this, android.R.layout.simple_dropdown_item_1line,sltp);
         tp.setAdapter(arrayAdapter);
+        CharSequence[] sltphuong=new CharSequence[]{"Chọn phường"};
+        ArrayAdapter<CharSequence> arrayAdapterP=new ArrayAdapter<CharSequence>(this, android.R.layout.simple_dropdown_item_1line,sltphuong);
+        phuong.setAdapter(arrayAdapterP);
     }
 
     @Override
@@ -58,19 +62,32 @@ public class TTKhachHang extends AppCompatActivity {
         btnxacnhan = findViewById(R.id.btnxacnhantt);
         btntrove = findViewById(R.id.btntrove);
         Evenspinner();
+        phuong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextSize(18);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         this.tp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextSize(18);
                 if(tp.getSelectedItem().toString() == "Hà Nội"){
-                    CharSequence[] slp=new CharSequence[]{"Phường Cầu Diễn","Phường Xuân Phương","Phường Minh Khai","Phường Trương Định"};
+                    CharSequence[] slp=new CharSequence[]{"Chọn phường","Phường Cầu Diễn","Phường Xuân Phương","Phường Minh Khai","Phường Trương Định"};
                     ArrayAdapter<CharSequence> arrayAdapterP=new ArrayAdapter<CharSequence>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line,slp);
                     phuong.setAdapter(arrayAdapterP);
                 }else if(tp.getSelectedItem().toString() == "Bắc Ninh"){
-                    CharSequence[] slp=new CharSequence[]{"Phường Tiền An","Phường Vạn An","Phường Vệ An","Phường Vũ Ninh"};
+                    CharSequence[] slp=new CharSequence[]{"Chọn phường","Phường Tiền An","Phường Vạn An","Phường Vệ An","Phường Vũ Ninh"};
                     ArrayAdapter<CharSequence> arrayAdapterP=new ArrayAdapter<CharSequence>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line,slp);
                     phuong.setAdapter(arrayAdapterP);
                 }else if(tp.getSelectedItem().toString() == "Bắc Giang") {
-                    CharSequence[] slp=new CharSequence[]{"Phường Đa Mai","Phường Dĩnh Kế","Phường Lê Lợi","Phường Ngô Quyền"};
+                    CharSequence[] slp=new CharSequence[]{"Chọn phường","Phường Đa Mai","Phường Dĩnh Kế","Phường Lê Lợi","Phường Ngô Quyền"};
                     ArrayAdapter<CharSequence> arrayAdapterP=new ArrayAdapter<CharSequence>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line,slp);
                     phuong.setAdapter(arrayAdapterP);
                 }
