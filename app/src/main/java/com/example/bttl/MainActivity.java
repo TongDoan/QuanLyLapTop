@@ -29,7 +29,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     ArrayList<sanpham> sp;
     sanphamadapter spadapter;
+    sanphamadapter sanpadapter;
 
     MenuAdapter menuAdapter;
     ImageView imageButton;
@@ -75,12 +78,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView btngiam;
    TextView trang;
    TextView tenuser;
+   LinearLayout linearLayout;
    int page =1;
    public static ArrayList<giohang> giohangArrayList;
+
    ArrayList<sanpham> spshow;
+   public static String tk="";
 
     private int slitem=0;
-    String url="http://192.168.1.3:8080/appbanhang/getsanpham.php";
+    String url= urlApi.ListSP;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menugiohang, menu);
@@ -108,9 +114,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getsp(url);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        tenuser.setText(tk);
         if (bundle != null) {
             String name = bundle.getString("Name");
             tenuser.setText(name);
+            tk=name;
         }
         registerForContextMenu(imageButton);
         btntimkiem.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                     sp.clear();
                     sp.addAll(sptimkiem);
+                    sanpadapter.notifyDataSetChanged();
                     if(sp.size()%4==0){
                         slitem=sp.size()/4;
                     }
@@ -157,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 sptimkiem.clear();
                 sp.clear();
                 sp.addAll(spbandau);
+                sanpadapter.notifyDataSetChanged();
                 if(sp.size()%4==0){
                     slitem=sp.size()/4;
                 }
@@ -229,13 +239,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "home", Toast.LENGTH_SHORT).show();
                break;
             case R.id.nav_location:
-                Toast.makeText(this, "Location", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,MapsActivity.class));
                 break;
             case R.id.nav_contact:
-                Toast.makeText(this, "Contatc", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,ContactList.class));
                 break;
             case R.id.nav_logout:
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                break;
+            case R.id.nav_shopping:
+                startActivity(new Intent(MainActivity.this,sanphamdamua.class));
+                break;
+            case R.id.nav_account:
+                startActivity(new Intent(MainActivity.this,taikhoan.class));
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -258,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                 );
+                sanpadapter.notifyDataSetChanged();
                 show(Integer.parseInt(trang.getText().toString().trim()));
                 break;
             case R.id.sortten:
@@ -268,6 +285,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                 );
+                sanpadapter.notifyDataSetChanged();
                 show(Integer.parseInt(trang.getText().toString().trim()));
                 break;
             case R.id.sortgiatang:
@@ -278,6 +296,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                 );
+                sanpadapter.notifyDataSetChanged();
                 show(Integer.parseInt(trang.getText().toString().trim()));
                 break;
             case R.id.sortgia:
@@ -288,6 +307,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                 );
+                sanpadapter.notifyDataSetChanged();
                 show(Integer.parseInt(trang.getText().toString().trim()));
                 break;
         }
@@ -345,6 +365,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     hinhanh=object.getString("Hinhanh");
                                     mota=object.getString("Mota");
                                     sp.add(new sanpham(Id,tensp,giasp,hinhanh,mota));
+                                    sanpadapter.notifyDataSetChanged();
                                 } catch (JSONException e) {
                                     Toast.makeText(MainActivity.this,"fail" , Toast.LENGTH_LONG).show();
                                     e.printStackTrace();
@@ -386,6 +407,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btntimkiem=(ImageView) findViewById(R.id.nuttimkiem);
         btnhuy=(ImageView) findViewById(R.id.nuthuy);
         trang=(TextView) findViewById(R.id.textrang);
+        linearLayout=(LinearLayout) findViewById(R.id.layoutchuyentrang);
+        linearLayout.setVisibility(View.INVISIBLE);
         sptimkiem=new ArrayList<>();
         spbandau=new ArrayList<>();
         drawerLayout=(DrawerLayout) findViewById(R.id.drawerlayout);
@@ -398,10 +421,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tenuser=(TextView) navigationView.getHeaderView(0).findViewById(R.id.tenusr);
         spshow=new ArrayList<>();
         sp=new ArrayList<>();
+        sanpadapter=new sanphamadapter(this,sp);
         spadapter=new sanphamadapter(this,spshow);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
-        recyclerView.setAdapter(spadapter);
+        recyclerView.setAdapter(sanpadapter);
         btntang=(ImageView) findViewById(R.id.buttontang);
         btngiam=(ImageView) findViewById(R.id.buttongiam);
         if(giohangArrayList != null){
@@ -410,5 +434,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             giohangArrayList = new ArrayList<>();
         }
 
+
+    }
+
+    public void stypeselector(View view) {
+        RadioGroup radioGroup=findViewById(R.id.radiogroup);
+        switch (radioGroup.getCheckedRadioButtonId()){
+            case R.id.radioswip:
+                linearLayout.setVisibility(View.INVISIBLE);
+                recyclerView.setAdapter(sanpadapter);
+                break;
+            case R.id.radiogrid:
+                linearLayout.setVisibility(View.VISIBLE);
+                trang.setText("1");
+                btngiam.setVisibility(View.INVISIBLE);
+                if(sp.size()%4==0){
+                    slitem=sp.size()/4;
+                }
+                else{
+                    slitem=sp.size()/4+1;
+                }
+                if(slitem==1){
+                    btntang.setVisibility(View.INVISIBLE);
+                }else{
+                    btntang.setVisibility(View.VISIBLE);
+                }
+                show(1);
+                recyclerView.setAdapter(spadapter);
+                break;
+        }
     }
 }

@@ -17,7 +17,7 @@
     <LinearLayout
         android:id="@+id/linearlayoutgiohang"
         android:layout_width="match_parent"
-        android:layout_height="452dp"
+        android:layout_height="440dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -73,7 +73,7 @@
                 android:id="@+id/txttongtien"
                 android:layout_width="95dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="center|right"

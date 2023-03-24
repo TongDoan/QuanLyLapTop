@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
-
+    tools:context=".RegisterActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -33,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Đăng nhập"
+            android:text="Đăng ký"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="32sp"></TextView>
@@ -82,73 +81,52 @@
             android:drawableLeft="@drawable/baseline_vpn_key_24"
             android:drawablePadding="16dp"></EditText>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhập lại mật khẩu của bạn :"
+            android:textColor="#fff"
+            android:textSize="18sp"></TextView>
+
+        <EditText
+            android:id="@+id/editTextPersonRePassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Nhập lại password"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/baseline_vpn_key_24"
+            android:drawablePadding="16dp"></EditText>
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/loginBtn"
+            android:id="@+id/btndangky"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:background="@drawable/login_btn_background"
-            android:text="Đăng nhập"
-            android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/register"
-            style="@android:style/Widget.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:background="@drawable/login_btn_background"
             android:text="Đăng ký"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnquaylai"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_btn_background"
+            android:text="Quay lại"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
 
-    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/others"
-        android:text="Or sign in with"
-        android:textSize="21sp"
-        android:layout_above="@+id/socialicons"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ffffff"
-        >
-    </TextView>
-
-    <LinearLayout
-        android:id="@+id/socialicons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        >
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/facebook">
-        </ImageView>
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/google">
-        </ImageView>
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/twitter">
-        </ImageView>
     </LinearLayout>
 
 </RelativeLayout>

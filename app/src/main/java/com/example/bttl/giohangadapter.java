@@ -79,7 +79,7 @@ public class giohangadapter extends AppCompatActivity {
             tongtien += MainActivity.giohangArrayList.get(i).getGiasp();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        txttongtien.setText(decimalFormat.format(tongtien) + "Đ");
+        txttongtien.setText(decimalFormat.format(tongtien) + "VND");
     }
     private void CheckData(){
         if(MainActivity.giohangArrayList.size() <=0){
@@ -102,11 +102,6 @@ public class giohangadapter extends AppCompatActivity {
             }
         });
     }
-    public void ActoinToolbar(){
-        Toolbar toolbargiohag = null;
-        setSupportActionBar(toolbargiohag);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        
-    }
+
     
 }

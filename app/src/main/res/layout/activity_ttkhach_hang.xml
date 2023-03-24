@@ -12,24 +12,25 @@
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Thông tin thanh toán"
         android:textColor="#00A4FE"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="187dp"
+        android:layout_height="281dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="5dp"
         android:orientation="vertical"
+        android:background="@drawable/shadow_ttkhach"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
@@ -40,29 +41,37 @@
             android:layout_height="48dp"
             android:ems="10"
             android:hint="Nhập tên khách hàng"
+            android:inputType="textPersonName"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextsdt"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:textSize="20sp"
+            android:hint="Nhập số điện thoại"
             android:inputType="textPersonName" />
 
+        <Spinner
+            android:id="@+id/spinnerTp"
+
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
+        <Spinner
+            android:id="@+id/spinnerPhuong"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
         <EditText
-            android:id="@+id/editTextTextsdt"
+            android:id="@+id/editTextTextsonha"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Nhập số điện thoại"
-            android:inputType="phone"
-
-            />
-
-        <EditText
-            android:id="@+id/editTextTextemail"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:hint="Nhập email"
-            android:inputType="textEmailAddress"
-
-            />
+            android:hint="Số nhà"
+            android:textSize="20sp"
+            android:inputType="textPersonName" />
 
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
@@ -92,13 +101,26 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" ></androidx.appcompat.widget.AppCompatButton>
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="106dp"
-        android:background="@drawable/login_shape_bk"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        android:layout_marginTop="1dp"
+
+        android:background="@drawable/loginpanel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Shop Laptop"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

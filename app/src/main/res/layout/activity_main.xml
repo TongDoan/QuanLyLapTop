@@ -23,11 +23,11 @@
             <ViewFlipper
                 android:id="@+id/viewflipper"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="150dp">
 
             </ViewFlipper>
             <LinearLayout
-                android:background="#8692f7"
+                android:background="#F7F7F7"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -36,9 +36,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:text="Các sản phẩm"
+                        android:text="Danh sách sản phẩm"
                         android:layout_margin="5dp"
                         android:textSize="20dp"
+                        android:textColor="@color/black"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -56,7 +57,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    >
                     <EditText
                         android:id="@+id/txttimkiem"
                         android:layout_width="170dp"
@@ -80,38 +81,67 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         />
+                    <RadioGroup
+                        android:id="@+id/radiogroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="5dp"
+                        android:gravity="end">
+                     <RadioButton
+                         android:id="@+id/radioswip"
+                         android:layout_width="40dp"
+                         android:layout_height="40dp"
+                         android:checked="true"
+                         android:onClick="stypeselector"
+                         android:background="@drawable/stype_selector"
+                         android:button="@drawable/baseline_format_line_spacing_48"
+                         />
+                        <RadioButton
+                            android:id="@+id/radiogrid"
+                            android:onClick="stypeselector"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/stype_selector"
+                            android:button="@drawable/baseline_grid_view_48"
+                            />
+                    </RadioGroup>
                 </LinearLayout>
+
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="horizontal"
+                    android:id="@+id/layoutchuyentrang"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:id="@+id/buttongiam"
-                        android:src="@drawable/back"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginRight="10dp"
-                        />
+                        android:src="@drawable/back" />
+
                     <TextView
                         android:id="@+id/textrang"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:text="1"
-                        android:textSize="20dp"
-                        android:textAlignment="center"
                         android:background="@drawable/duongvien"
-                        />
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textSize="20dp" />
+
                     <ImageView
                         android:id="@+id/buttontang"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/next"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:text="phai"
-                        />
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/next"
+                        android:text="phai" />
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
+                    android:shape="rectangle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"

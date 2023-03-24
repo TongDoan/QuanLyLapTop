@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/shadow_butoon"/>
+    <item>
+        <shape >
+        <corners android:bottomLeftRadius="15dp" android:bottomRightRadius="15dp"></corners>
+            <gradient android:startColor="#00A4FE" android:centerColor="#00A4FE" android:endColor="#00A4FE"></gradient>
+        </shape>
+    </item>
+</layer-list>

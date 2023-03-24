@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mnuSendEmail"
+        android:title="SendEmail" />
+    <item
+        android:id="@+id/mnuSendMessage"
+        android:title="SendMessage" />
+    <item
+        android:id="@+id/mnuCall"
+        android:title="Call" />
+    <item
+        android:id="@+id/mnuCount"
+        android:title="Count" />
+</menu>

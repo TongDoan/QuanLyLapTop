@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".sanphamdamua">
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolspdamua"
+    android:background="#ff00dfff"
+    app:title="Sản phẩm đã mua"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <EditText
+            android:id="@+id/txtspdamua"
+            android:layout_width="300dp"
+            android:hint="Tên sản phẩm"
+            android:layout_height="50dp">
+        </EditText>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/lstspdamua"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+</LinearLayout>
