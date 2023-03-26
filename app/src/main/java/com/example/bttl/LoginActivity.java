@@ -47,7 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     private void checkaccount(){
         int ktr=0;
         for(user a:userArrayList){
-            if(a.getEmail().trim().equals(emailUser.getText().toString().trim()) && a.getMatkhat().trim().equals(passUser.getText().toString().trim())){
+            if(a.getEmail().trim().equals(emailUser.getText().toString().trim()) &&
+               a.getMatkhat().trim().equals(passUser.getText().toString().trim())){
                 ktr++;
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 Bundle bundle = new Bundle();
@@ -60,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         if(ktr == 0){
             Toast.makeText(this, "Tài khoản hoặc mật khẩu không chính xác.", Toast.LENGTH_SHORT).show();
-
         }
 
 
@@ -112,7 +112,16 @@ public class LoginActivity extends AppCompatActivity {
                 });
         requestQueue.add(jsonArrayRequest);
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startActivity(startMain);
+        finish();
+        super.onBackPressed();
+    }
     private void initView(){
         emailUser = findViewById(R.id.editTextPersonEmail);
         passUser = findViewById(R.id.editTextPersonPassword);

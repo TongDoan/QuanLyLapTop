@@ -6,12 +6,6 @@
         android:id="@+id/mnuSendEmail"
         android:title="SendEmail" />
     <item
-        android:id="@+id/mnuSendMessage"
-        android:title="SendMessage" />
-    <item
-        android:id="@+id/mnuCall"
-        android:title="Call" />
-    <item
         android:id="@+id/mnuCount"
         android:title="Count" />
 </menu>

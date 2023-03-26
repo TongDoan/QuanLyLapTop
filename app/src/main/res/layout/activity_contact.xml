@@ -10,7 +10,7 @@
         android:id="@+id/toolbarlienhe"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#b13c2b"
+        android:background="#8692f7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,15 +32,15 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="423dp"
-        android:layout_height="36dp"
+        android:layout_width="396dp"
+        android:layout_height="37dp"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Chào mừng đến với shop Laptop Group6"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarlienhe" />
 
@@ -71,7 +71,6 @@
         android:layout_width="387dp"
         android:layout_height="403dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSearch" />
 

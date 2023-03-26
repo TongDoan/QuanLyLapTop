@@ -195,11 +195,11 @@ public class ContactList extends AppCompatActivity {
         db = new MyDB(this,"Contact",null,1);
 
         //Them du lieu lan dau(0 dung 2 lan se bi trung id)
-//        db.addContact(new Contact(1,"","Contact Manager","Lê Thiên Khang","0000","LeThienKhang@gmail.com"));
-//        db.addContact(new Contact(2,"","Gio Hang Manager","Tống Trung Đoàn ","1111","TongTrungDoan@gmail.com"));
-//        db.addContact(new Contact(3,"","Location Manager","Nguyễn Đình An Huy","2222","NguyenDinhAnHuy@gmail.com"));
-//        db.addContact(new Contact(4,"","Login Manager","Nguyễn Tuấn Hưng","3333","NguyenTuanHung@gmail.com"));
-//        db.addContact(new Contact(5,"","Product Manager","Vũ Trung Tuấn","4444","VuTrungTuan@gmail.com"));
+        db.addContact(new Contact(1,"","Contact Manager","Lê Thiên Khang","0000","LeThienKhang@gmail.com"));
+        db.addContact(new Contact(2,"","Gio Hang Manager","Tống Trung Đoàn ","1111","TongTrungDoan@gmail.com"));
+        db.addContact(new Contact(3,"","Location Manager","Nguyễn Đình An Huy","2222","NguyenDinhAnHuy@gmail.com"));
+        db.addContact(new Contact(4,"","Login Manager","Nguyễn Tuấn Hưng","3333","NguyenTuanHung@gmail.com"));
+        db.addContact(new Contact(5,"","Product Manager","Vũ Trung Tuấn","4444","VuTrungTuan@gmail.com"));
 
         ContactList = db.getAllContact();
 

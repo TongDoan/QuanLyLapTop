@@ -13,13 +13,14 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.appcompat.widget.Toolbar
-                app:title="Trang chủ"
                 android:id="@+id/toobarmanhinhchinh"
-                android:background="#ff00dfff"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-            </androidx.appcompat.widget.Toolbar>
+                android:layout_height="?attr/actionBarSize"
+                android:background="#8692f7"
+                app:title="Trang chủ"
+                app:titleTextColor="@color/ic_launcher_background"></androidx.appcompat.widget.Toolbar>
             <ViewFlipper
                 android:id="@+id/viewflipper"
                 android:layout_width="match_parent"
@@ -156,6 +157,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/nav_header"
+
             app:menu="@menu/nav_menu"
             app:itemIconTint="@color/black"
             app:itemTextColor="@color/black">
