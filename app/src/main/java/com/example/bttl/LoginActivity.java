@@ -28,8 +28,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn,register;
     public static ArrayList<user> userArrayList;
     String url=urlApi.user;
-    @Override
+   @Override
     public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startActivity(startMain);
