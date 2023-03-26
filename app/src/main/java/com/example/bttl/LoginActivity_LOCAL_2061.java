@@ -28,20 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn,register;
     public static ArrayList<user> userArrayList;
     String url=urlApi.user;
-<<<<<<< HEAD
 
-=======
-   @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
-        startMain.addCategory(Intent.CATEGORY_HOME);
-        startActivity(startMain);
-        finish();
-        super.onBackPressed();
-    }
->>>>>>> 13b5b8994fa1759b269b5da07a567d6a305db2e0
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

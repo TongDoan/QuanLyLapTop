@@ -28,9 +28,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn,register;
     public static ArrayList<user> userArrayList;
     String url=urlApi.user;
-<<<<<<< HEAD
-
-=======
    @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -41,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
->>>>>>> 13b5b8994fa1759b269b5da07a567d6a305db2e0
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     private void checkaccount(){
         int ktr=0;
         for(user a:userArrayList){
-            if(a.getEmail().trim().equals(emailUser.getText().toString().trim()) &&
-               a.getMatkhat().trim().equals(passUser.getText().toString().trim())){
+            if(a.getEmail().trim().equals(emailUser.getText().toString().trim()) && a.getMatkhat().trim().equals(passUser.getText().toString().trim())){
                 ktr++;
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 Bundle bundle = new Bundle();
@@ -75,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         if(ktr == 0){
             Toast.makeText(this, "Tài khoản hoặc mật khẩu không chính xác.", Toast.LENGTH_SHORT).show();
+
         }
 
 
@@ -126,16 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
         requestQueue.add(jsonArrayRequest);
     }
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
-        startMain.addCategory(Intent.CATEGORY_HOME);
-        startActivity(startMain);
-        finish();
-        super.onBackPressed();
-    }
+
     private void initView(){
         emailUser = findViewById(R.id.editTextPersonEmail);
         passUser = findViewById(R.id.editTextPersonPassword);
