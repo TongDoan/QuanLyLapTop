@@ -30,7 +30,7 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
     Button btndk,btnql;
     EditText edtemail,edtpass,edtrepass;
-    boolean check;
+
     String url= urlApi.adduser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         btndk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                check = false;
+                int check = 0;
                 for(user a:LoginActivity.userArrayList){
                     if(a.getEmail().trim().equals(edtemail.getText().toString().trim())){
                         AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
@@ -63,8 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
                         builder.show();
-                    }else {
-                        check = true;
+                        check++;
                     }
                 }
                 if(edtemail.getText().toString().isEmpty() || edtpass.getText().toString().isEmpty() || edtrepass.getText().toString().isEmpty()){
@@ -82,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                     });
                     builder.show();
                 }else {
-                    if(check){
+                    if(check == 0){
                         String email = edtemail.getText().toString().trim();
                         String matkhau = edtpass.getText().toString().trim();
                         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
