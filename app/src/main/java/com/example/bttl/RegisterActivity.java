@@ -67,6 +67,9 @@ public class RegisterActivity extends AppCompatActivity {
                         check = true;
                     }
                 }
+                if(edtemail.getText().toString().isEmpty() || edtpass.getText().toString().isEmpty() || edtrepass.getText().toString().isEmpty()){
+                    Toast.makeText(RegisterActivity.this, "Vui lòng kiểm tra lại thông tin đăng ký.", Toast.LENGTH_SHORT).show();
+                }
                 if(edtpass.getText().toString().trim().equals(edtrepass.getText().toString().trim()) == false){
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
                     builder.setTitle("Thông báo");

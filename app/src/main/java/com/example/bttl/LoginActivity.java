@@ -29,6 +29,14 @@ public class LoginActivity extends AppCompatActivity {
     public static ArrayList<user> userArrayList;
     String url=urlApi.user;
     @Override
+    public void onBackPressed() {
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startActivity(startMain);
+        finish();
+        super.onBackPressed();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
